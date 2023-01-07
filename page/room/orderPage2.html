@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>預定房間</title>
     <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="../../styles/main_styles.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="../../styles/bootstrap4/bootstrap.min.css"
+  />
+    <link
       rel="stylesheet"
       type="text/css"
       href="../../styles/main_styles.css"
@@ -21,6 +37,10 @@
   .form-control{
     height: 34px !important;
   }
+  .modal-dialog{
+      max-width: 800px !important;
+      margin-top: 200px;
+  }
   .w-10{
     width: 10%;
   }
@@ -31,6 +51,26 @@
   .margin-l-20{
     margin-left: 20px;
 
+  }
+  .form-control{
+    height: 34px !important;
+  }
+  .w-10{
+    width: 10%;
+  }
+  .margin-r-20{
+    margin-right: 20px;
+
+  }
+  .margin-l-20{
+    margin-left: 20px;
+
+  }
+  .body-h{
+    height: 800px;
+  }
+  .btn-test{
+    margin-top:300px
   }
 </style>
   </head>
@@ -80,78 +120,125 @@
     </header>
 
     <!-- 表身 -->
-    <div class="container page-body ">
-        <h1 class="table-title" style="margin-top: 100px;font-weight:bold;">預定頁面</h1>
-        <form>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">會員編號</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" disabled value="K21321321">
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">房型名稱</label>
-            <select class="form-select form-control" aria-label="Default select example">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="d-flex">
-            <div class="mb-3 margin-r-20 w-10">
-              <label for="exampleInputPassword1"  class="form-label">入住人數</label>
-              <select class="form-select form-control " aria-label="Default select example">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <div class="mb-3  w-10">
-              <label for="exampleInputPassword1 " class="form-label">寵物數量</label>
-              <select class="form-select form-control" aria-label="Default select example">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-          </div>
-          <div class="d-flex">
-            <div class='mb-3 w-100 margin-r-20'>
-              <label for="">入住日期：</label>
-              <div class="form-group">
-                 <div class='input-group date' id='date_start'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                 </div>
+    <div class="container body-h">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <!-- Button trigger modal -->
+          <button
+            class="btn-test"
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Launch demo modal
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="exampleModalLabel">
+                    預訂頁面
+                  </h3>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">會員編號</label>
+                          <input type="text" class="form-control" id="exampleInputPassword1" disabled value="K21321321">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">房型名稱</label>
+                          <select class="form-select form-control" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                        <div class="d-flex">
+                            <div class='mb-3 w-100 margin-r-20'>
+                              <label for="">入住日期：</label>
+                              <div class="form-group">
+                                 <div class='input-group date' id='date_start'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                 </div>
+                              </div>
+                            </div>
+                            <div class='mb-3 w-100 margin-l-20'>
+                              <label for="">退房日期：</label>
+                              <div class="form-group">
+                                 <div class='input-group date' id='date_end'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                 </div>
+                              </div>
+                            </div>
+                          </div>
+                        <div class="d-flex">
+                          <div class="mb-3 w-100 margin-r-20 ">
+                            <label for="exampleInputPassword1"  class="form-label">入住人數</label>
+                            <input type="number" class="form-control" id="exampleInputPassword1" >
+
+                          </div>
+                          <div class="mb-3 w-100  margin-l-20 ">
+                            <label for="exampleInputPassword1 " class="form-label">寵物數量</label>
+                            <input type="number" class="form-control" id="exampleInputPassword1" >
+
+                          </div>
+                        </div>
+
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label" style="margin-top: 20px;">金額總計</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+                
+              </div>
+              
+              <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">確認上述資訊無誤!</label>
+                </div>
+              
+                        </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    取消
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    送出
+                  </button>
+                </div>
               </div>
             </div>
-            <div class='mb-3 w-100 margin-l-20'>
-              <label for="">退房日期：</label>
-              <div class="form-group">
-                 <div class='input-group date' id='date_end'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                 </div>
-              </div>
-            </div>
           </div>
-<div class="mb-3">
-  <label for="exampleInputPassword1" class="form-label" style="margin-top: 20px;">金額總計</label>
-  <input type="password" class="form-control" id="exampleInputPassword1">
-  
-</div>
-
-<div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">確認上述資訊無誤!</label>
-  </div>
-
-            <button id="btn" type="button" class="btn btn-outline-warning" style="margin-left: 500px; margin-bottom: 20px; color:black; background-color: antiquewhite;" >確認送出</button>
-          </form>
+        </div>
+        <div class="col-4"></div>
+      </div>
     </div>
 
      <!-- Footer -->
@@ -237,11 +324,19 @@
           </div>
       </footer>
 
-      <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
-
 <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script
+src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+crossorigin="anonymous"
+></script>
 
 <script>
 $('#date_start').datetimepicker({
