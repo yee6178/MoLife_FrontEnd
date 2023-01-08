@@ -1,0 +1,119 @@
+/* 整個頁籤及內容最外層區塊 */
+div.tab_container{
+  box-sizing: border-box;
+  width: 700px;
+  
+  margin-left: 500px;
+  margin-bottom: 70px;
+  margin-top: 70px;
+}
+
+/* 頁籤區塊 */
+div.tab_container div.tab_list_block{
+  padding-left: 20px;
+}
+
+/* 頁籤列表 */
+div.tab_container div.tab_list_block ul.tab_list{
+  list-style: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+div.tab_container div.tab_list_block ul.tab_list > li{
+  display: inline-block;
+  
+}
+div.tab_container div.tab_list_block ul.tab_list > li > a{
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #646E78;
+  padding: 2px 20px;
+  border-radius: 5px 5px 0 0;
+  cursor: pointer;
+  color: #ccc;
+
+  position: relative;
+  top: 1px;
+}
+
+/* 畫出底部黑線 */
+div.tab_container div.tab_list_block ul.tab_list > li > a::after{
+  content: "";
+  position: absolute;
+  width: calc(100% + 2px);
+  height: 1px;
+  background-color: #646E78;
+  bottom:-1px;
+  left: -1px;
+  z-index: 1;
+}
+div.tab_container div.tab_list_block ul.tab_list > li > a.-on{
+  border: 1px solid #646E78;
+  color: black;
+  background-color: #8D98A7;
+}
+/* 將底部黑線改成白色 */
+div.tab_container div.tab_list_block ul.tab_list > li > a.-on::after{
+  background-color: #8D98A7;
+  width: 100%;
+  left: 0;
+}
+
+
+/* 頁籤內容區塊 */
+div.tab_container div.tab_contents{
+  border: 1px solid #646E78;
+/*   margin-top: 30px; */
+}
+div.tab_container div.tab_contents div.tab{
+  padding: 10px;
+  display: none;
+}
+div.tab_container div.tab_contents div.tab.-on{
+  display: block;
+  background-color: #8D98A7;
+}
+
+
+h3{
+    font-size: 30px;
+    line-height: 1.5;
+}
+
+#news{
+    padding: 80px 0px;
+    padding-top: 70px;
+}
+
+/* #hot_item{
+    padding: 80px 0px;
+    /* background: rgb(255, 235, 246); */
+    /* margin-left: 50px;
+    margin-right: 50px;
+} */ 
+
+#hot_item .btn {
+    background: #EAB464;
+    color: white;
+    padding: 9px 26px;
+    border-radius: 20px;
+    border-width: 0px;
+}
+
+/* h1,h2,h3,h4,h5,h6{
+    font-family: 'Lobster', cursive;
+ }
+
+ p,a,input,label,textarea,span,ul,li{
+    font-family: 'Kalam', cursive;
+ } */
+
+ #hot_room .btn {
+    background: #EAB464;
+    color: white;
+    padding: 9px 26px;
+    border-radius: 20px;
+    border-width: 0px;
+}
