@@ -31,6 +31,10 @@
       type="text/css"
       href="../../styles/bootstrap4/bootstrap.min.css"
     />
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css"
+  />
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 <style>
@@ -75,50 +79,6 @@
 </style>
   </head>
   <body>
-    <!-- Header -->
-
-    <header class="header trans_300">
-      <!-- Main Navigation -->
-      <div class="main_nav_container bg-yellow">
-        <div>
-          <div class="row">
-            <div class="col-lg-12 text-right">
-              <div class="logo_container">
-                <a href="#">
-                  <img src="../../images/home/logoMoLife.png" />
-                </a>
-              </div>
-              
-              <nav class="navbar">
-                <ul class="navbar_menu">
-                  <li><a href="#">寵物旅館</a></li>
-                  <li><a href="#">商品專區</a></li>
-                  <li><a href="#">寵物募款</a></li>
-                  <li><a href="#">寵物論壇</a></li>
-                  <li><a href="#">聯絡我們</a></li>
-                  <li><a href="#">管理員後台</a></li>
-                </ul>
-                <ul class="navbar_user">
-                  <a href="#"
-                    ><img class="icon" src="../../images/home/car.png"
-                  /></a>
-                  <a href="#"
-                    ><img class="icon" src="../../images/home/ring.png"
-                  /></a>
-                  <a href="#"
-                    ><img class="icon" src="../../images/home/man.png"
-                  /></a>
-                </ul>
-                <div class="hamburger_container">
-                  <i class="fa fa-bars" aria-hidden="true"></i>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <!-- 表身 -->
     <div class="container body-h">
       <div class="row">
@@ -135,7 +95,7 @@
             Launch demo modal
           </button>
 
-          <!-- Modal -->
+          <!-- Modal_start -->
           <div
             class="modal fade"
             id="exampleModal"
@@ -157,12 +117,12 @@
                   ></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
+                  <form>
+                    <div class="mb-3">
                           <label for="exampleInputPassword1" class="form-label">會員編號</label>
                           <input type="text" class="form-control" id="exampleInputPassword1" disabled value="K21321321">
-                        </div>
-                        <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">房型名稱</label>
                           <select class="form-select form-control" aria-label="Default select example">
                             <option selected>Open this select menu</option>
@@ -170,8 +130,8 @@
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                           </select>
-                        </div>
-                        <div class="d-flex">
+                    </div>
+                    <div class="d-flex">
                             <div class='mb-3 w-100 margin-r-20'>
                               <label for="">入住日期：</label>
                               <div class="form-group">
@@ -194,8 +154,8 @@
                                  </div>
                               </div>
                             </div>
-                          </div>
-                        <div class="d-flex">
+                    </div>
+                    <div class="d-flex">
                           <div class="mb-3 w-100 margin-r-20 ">
                             <label for="exampleInputPassword1"  class="form-label">入住人數</label>
                             <input type="number" class="form-control" id="exampleInputPassword1" >
@@ -206,20 +166,16 @@
                             <input type="number" class="form-control" id="exampleInputPassword1" >
 
                           </div>
-                        </div>
-
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label" style="margin-top: 20px;">金額總計</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-                
-              </div>
-              
-              <div class="mb-3 form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">確認上述資訊無誤!</label>
-                </div>
-              
-                        </form>
+                    </div>
+                    <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label" style="margin-top: 20px;">金額總計</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-3 form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">確認上述資訊無誤!</label>
+                    </div>
+                  </form>
                 </div>
                 <div class="modal-footer">
                   <button
@@ -229,104 +185,21 @@
                   >
                     取消
                   </button>
-                  <button type="button" class="btn btn-primary">
+                  <button id="success" type="button" class="btn btn-primary">
                     送出
                   </button>
                 </div>
               </div>
             </div>
           </div>
+          <!-- Modal_end -->
         </div>
-        <div class="col-4"></div>
       </div>
     </div>
 
-     <!-- Footer -->
-		<div class="row" >
-			<div class="col">
-				<div id="google_map">
-					<div class="map_container">
-						<div id="map"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-      <footer class="bg-yellow">
-      
-		  
-          <div class="row">
-			
-            <div class="col-lg-6">
-              <div
-                class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center"
-              >
-			  <div class="container">
-				<ul class="footer_nav">
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">FAQs</a></li>
-					<li><a href="contact.html">Contact us</a></li>
-				  </ul>
-			  </div>
-                
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div
-                class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center"
-              >
-                <ul>
-                  <li>
-                    <a href="#"
-                      ><i class="fa fa-facebook" aria-hidden="true"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="fa fa-twitter" aria-hidden="true"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="fa fa-instagram" aria-hidden="true"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="fa fa-skype" aria-hidden="true"></i
-                    ></a>
-                  </li>
-                  <li>
-                    <a href="#"
-                      ><i class="fa fa-pinterest" aria-hidden="true"></i
-                    ></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="footer_nav_container">
-                  <div class="container">
-                    <div class="cr">
-                      ©2022 All Rights Reserverd. Made with
-                      <i class="fa fa-heart-o" aria-hidden="true"></i> by
-                      <a href="#">Colorlib</a> &amp; distributed by
-                      <a href="https://themewagon.com">Tibame TGA-105 第四組</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-      </footer>
-
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+
 <script
 src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
 integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -338,6 +211,11 @@ integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ
 crossorigin="anonymous"
 ></script>
 
+
+
+<!-- datetimepicker -->
+<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script>
 $('#date_start').datetimepicker({
   date:null, //一開始輸入框的日期為空
@@ -369,9 +247,11 @@ $('#date_end').datetimepicker({
 });
 
 </script>
+<!-- sweetAlert -->
+<script src="../../alert.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
-
-
+<!-- AJAX -->
 <script>
 const btn = document.querySelector('#btn')
 const input = document.querySelector('#exampleInputEmail1')

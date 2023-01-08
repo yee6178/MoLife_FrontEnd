@@ -24,6 +24,7 @@
 }
 img.img_card{
     transform:scale(1,1);transition: all 1s ease-out;
+    height: 100%;
 }
 img.img_card:hover {
     transform: scale(1.1,1.1);
@@ -193,13 +194,13 @@ img.img_card:hover {
     /* display: block */
 }
 .article_txt h1 {
-    padding-bottom: 35px;
+    /* padding-bottom: 35px; */
     font-size: 35px;
 }
 
 .article_txt p {
-    margin-top: 35px;
-    font-size: 18px;
+    margin-top: 10px;
+    font-size: 15px;
 }
 
 .home_atricle_07 ul input {
@@ -466,7 +467,7 @@ img.img_card:hover {
     }
     .article_txt p {
         margin-top: 10px;
-        font-size: 20px;
+        font-size: 15px;
     }
     .home_atricle_page {
         height: 800px;
