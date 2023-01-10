@@ -1,11 +1,20 @@
 // Alert Modal Type
 $(document).on("click", "#success", function (e) {
     swal(
-      "Success",
-      'You clicked the <b style="color:green;">Success</b> button!',
+      "送出成功",
+      '您成功送出 <b style="color:green;">此筆訂單</b> !',
       "success"
     );
   });
+
+  //加入收藏彈窗
+  // $(document).on("click", "#collect", function (e) {
+  //   swal(
+  //     "Success",
+  //     'You clicked the <b style="color:green;">Success</b> button!',
+  //     "success"
+  //   );
+  // });
   
   $(document).on("click", "#error", function (e) {
     swal(
