@@ -75,20 +75,20 @@ $(document).on("click", "#success", function (e) {
   // Alert With Input Type
   $(document).on("click", "#subscribe", function (e) {
     swal({
-      title: "Submit email to subscribe",
-      input: "email",
-      inputPlaceholder: "Example@email.xxx",
+      title: "您的留言評論",
+      input: "text",
+      inputPlaceholder: "請輸入...",
       showCancelButton: true,
       confirmButtonText: "Submit",
       showLoaderOnConfirm: true,
       preConfirm: (email) => {
         return new Promise((resolve) => {
-          setTimeout(() => {
-            if (email === "example@email.com") {
-              swal.showValidationError("This email is already taken.");
-            }
-            resolve();
-          }, 2000);
+          // setTimeout(() => {
+          //   if (email === "example@email.com") {
+          //     swal.showValidationError("This email is already taken.");
+          //   }
+          //   resolve();
+          // }, 2000);
         });
       },
       allowOutsideClick: false
