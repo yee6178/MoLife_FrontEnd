@@ -91,7 +91,6 @@ ul {
               <th>訂單金額</th>
               <th>訂單狀態</th>
               <th>評價</th>
-              <th>意見回饋</th>
 
             </tr>
           </thead>
@@ -369,18 +368,28 @@ crossorigin="anonymous"
       {
         data: null,
         render: function (data, type, row, meta) {
-          return '<button class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#exampleModal">Get All Data</button>';
+          return '<button class="btn btn-outline-warning " data-bs-toggle="modal" data-bs-target="#exampleModal"> 評價</button>';
         }
+        // '<button type="button"   class="btn btn-outline-warning btn-comment">評價</button>'
       },
       
-      {
-        data: null,
-        render: function (data, type, row, meta) {
-          return '<button type="button"   class="btn btn-outline-warning btn-comment">評價</button>';
-        }
-      },
+     
     ]
   });
+
+    $("#table-data").click( function (data, callback, settings) {
+      axios
+        .get("https://jsonplaceholder.typicode.com/users")
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    
+
+  });
+
   // API刷新
   $(".btn-reload").click(function () {
     refreshTable("#table-data");

@@ -7,7 +7,9 @@ $(document).on("click", "#success", function (e) {
     );
   });
 
-  //加入收藏彈窗
+ 
+
+  // 加入收藏彈窗
   // $(document).on("click", "#collect", function (e) {
   //   swal(
   //     "Success",

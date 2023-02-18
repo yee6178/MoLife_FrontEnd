@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="Colo Shop Template" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
     <link
       rel="stylesheet"
@@ -68,10 +69,10 @@
       rel="stylesheet"
     /> -->
     <!-- datetimepicker -->
-    <link
+    <!-- <link
       href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
       rel="stylesheet"
-    />
+    /> -->
     <!-- font-awesome -->
     <link
       href="../../plugins/font-awesome-4.7.0/css/font-awesome.min.css"
@@ -126,6 +127,14 @@
       }
       .btn-test {
         margin-top: 300px;
+      }
+      .date-input{
+        height: 33px;
+        padding: 6px 12px;
+        width: 100%;
+        border: #ced4da 1px solid;
+        margin-top: 1px;
+        border-radius: 4px;
       }
     </style>
   </head>
@@ -203,6 +212,7 @@
           <div class="product_details">
             <div class="product_details_title">
               <h2>貓咪尊爵房</h2>
+              <div id="pushJson">123</div>
               <p>
                 針對貓咪習性設計的房型，採用三米挑高設計，蜿蜒直達房頂的樓梯與步道，讓貓咪自由自在的穿梭其中，徹底滿足貓咪垂直運動的細胞。
               </p>
@@ -339,10 +349,9 @@
             </div>
           </div>
           <div style="padding-top: 50px">
-            <button
+            <button 
             class="btn btn-Reserve btn-outline-warning btn-lg"
-            
-            data-bs-target="#exampleModal"
+            id="collect"
           >
             新增收藏
           </button>
@@ -354,6 +363,12 @@
             >
               立即預定
             </button>
+          <button 
+            class="btn btn-Reserve btn-outline-warning btn-lg"
+            id="getData"
+          >
+            get
+          </button>
 
           </div>
         </div>
@@ -739,19 +754,25 @@
                   <div class="form-group">
                     <div class="input-group date" id="date_start">
                       <input
-                        type="date"
-                        class="form-control"
+                        type="text"
                         id="startDate"  
                         name="startDate"
+                        class="date-input"
                       />
                     </div>
                   </div>
                 </div>
+                <!-- <input id="datetimepicker" type="text"> -->
                 <div class="mb-3 w-100 margin-l-20">
                   <label for="">退房日期：</label>
                   <div class="form-group">
                     <div class="input-group date" id="date_end">
-                      <input type="date" class="form-control" id="endDate"   name="endDate" class="form-control" />
+                      <input
+                        type="text"
+                        id="endDate"  
+                        name="endDate"
+                        class="date-input"
+                      />
                      
                     </div>
                   </div>
@@ -836,18 +857,33 @@ $("form").submit(function(event) {
     memberId: $("input[name=memberId]").val(),
     roomName: $("select[name=roomName]").val(),
     pet: $("input[name=pet]").val(),
-    startDate: $("input[name=startDate]").val(),
+    startDate: $("#startDate").val(),
     endDate: $("input[name=endDate]").val(),
     total:$("input[name=total]").val(),
-
+ 
   };
-  console.log(formData);
+
+    var formDataTest = {
+  };
+  formDataTest['memberId'] = 5;
+  formDataTest['roomTotalAmount'] = 1200;
+  formDataTest['roomOrderStatus'] = 0;
+  formDataTest['totalOfPet'] = 1;
+  formDataTest['roomCheckInDate'] = "2023-02-17";
+  formDataTest['roomCheckOutDate'] = "2023-02-18";
+  formDataTest['payerName'] = "kjijoj";
+  formDataTest['payerPhone'] = '0919924232';
+  formDataTest['orderStatus'] = 1;
+
+  formDataTest2 = JSON.stringify(formDataTest);
+  console.log(formDataTest2);
+
   // process the form
   $.ajax({
     type: "POST",
-    url: "//jsonplaceholder.typicode.com/posts",
-    data: formData,
-    dataType: "json",
+    url: "http://localhost:8080/roomorders",
+    data: formDataTest2,
+    contentType: "application/json",
     encode: true
   }).done(function(data) {
     $(".response")
@@ -940,39 +976,93 @@ $("form").submit(function(event) {
   integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
   crossorigin="anonymous"
 ></script>
-<!-- datetimepicker -->
-<script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<!-- datepicker start-->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.min.css" /> -->
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" /> -->
+
+<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script>
-  $("#date_start").datetimepicker({
-    date: null, //一開始輸入框的日期為空
-    format: "YYYY-MM-DD", //日期的顯示格式
-    locale: moment.locale("zh-tw"), //國別
-    minDate: moment().add(1, "days"), //顯示最小天數
-    maxDate: moment().add(30, "days"), //顯示最大天數，30為最大的顯示範圍為一個月為限
-    disabledDates: [
-      //隱藏的日期
-      moment().add(1, "days"), //前一日
-      moment().add(2, "days"), //前二日
-      "2021-10-10", //特別日期
-      "2021-12-25",
-    ],
-  });
-  $("#date_end").datetimepicker({
-    date: null, //一開始輸入框的日期為空
-    format: "YYYY-MM-DD", //日期的顯示格式
-    locale: moment.locale("zh-tw"), //國別
-    minDate: moment().add(1, "days"), //顯示最小天數
-    maxDate: moment().add(30, "days"), //顯示最大天數，30為最大的顯示範圍為一個月為限
-    disabledDates: [
-      //隱藏的日期
-      moment().add(1, "days"), //前一日
-      moment().add(2, "days"), //前二日
-      "2021-10-10", //特別日期
-      "2021-12-25",
-    ],
-  });
+var yyyy = new Date().getFullYear();
+// var tommorrow = new Date().getDate() + 1;
+var holiday = [
+new Date(yyyy, 0, 1).getTime(), /* Tahun Baru Masehi*/
+new Date(yyyy, 1, 16).getTime(), /* Imlek */
+new Date(yyyy, 2, 17).getTime(), /* Nyepi */
+new Date(yyyy, 2, 30).getTime(), /* Wafat Yesus */
+new Date(yyyy, 3, 1).getTime(), /* Isra Mi'raj */
+new Date(yyyy, 4, 1).getTime(), /* Hari Buruh */
+new Date(yyyy, 4, 10).getTime(), /* Kenaikan Yesus */
+new Date(yyyy, 4, 29).getTime(), /* Waisak */
+new Date(yyyy, 5, 1).getTime(), /* Kelahiran Pancasila */
+new Date(yyyy, 5, 15).getTime(), /* Idul Fitri */
+new Date(yyyy, 5, 16).getTime(), /* Idul Fitri */
+new Date(yyyy, 7, 17).getTime(), /* Kemerdekaan RI */
+new Date(yyyy, 7, 22).getTime(), /* Idul Adha */
+new Date(yyyy, 9, 11).getTime(), /* Tahun Baru Islam */
+new Date(yyyy, 10, 20).getTime(), /* Maulid Nabi Muhammad */
+new Date(yyyy, 11, 25).getTime() /* Natal */
+];
+console.log(holiday)
+
+$('#startDate').datepicker({
+// dateFormat: "yy-mm-dd",
+// maxDate: new Date(2018, 10, 30),
+beforeShowDay: function(date) {
+  var showDay = true;
+  if (date.getDay() == 0 || date.getDay() == 6) {
+    showDay = false;
+  }
+  // menggunakan fungsi jquery inArray
+  if ($.inArray(date.getTime(), holiday) > -1) {
+    showDay = false;
+  }
+  return [showDay];
+}
+});
 </script>
+<script>
+  var yyyy = new Date().getFullYear();
+  // var tommorrow = new Date().getDate() + 1;
+  var holiday = [
+  new Date(yyyy, 0, 1).getTime(), /* Tahun Baru Masehi*/
+  new Date(yyyy, 1, 16).getTime(), /* Imlek */
+  new Date(yyyy, 2, 17).getTime(), /* Nyepi */
+  new Date(yyyy, 2, 30).getTime(), /* Wafat Yesus */
+  new Date(yyyy, 3, 1).getTime(), /* Isra Mi'raj */
+  new Date(yyyy, 4, 1).getTime(), /* Hari Buruh */
+  new Date(yyyy, 4, 10).getTime(), /* Kenaikan Yesus */
+  new Date(yyyy, 4, 29).getTime(), /* Waisak */
+  new Date(yyyy, 5, 1).getTime(), /* Kelahiran Pancasila */
+  new Date(yyyy, 5, 15).getTime(), /* Idul Fitri */
+  new Date(yyyy, 5, 16).getTime(), /* Idul Fitri */
+  new Date(yyyy, 7, 17).getTime(), /* Kemerdekaan RI */
+  new Date(yyyy, 7, 22).getTime(), /* Idul Adha */
+  new Date(yyyy, 9, 11).getTime(), /* Tahun Baru Islam */
+  new Date(yyyy, 10, 20).getTime(), /* Maulid Nabi Muhammad */
+  new Date(yyyy, 11, 25).getTime() /* Natal */
+  ];
+  console.log(holiday)
+  
+  $('#endDate').datepicker({
+  // dateFormat: "yy-mm-dd",
+  // maxDate: new Date(2018, 10, 30),
+  beforeShowDay: function(date) {
+    var showDay = true;
+    if (date.getDay() == 0 || date.getDay() == 6) {
+      showDay = false;
+    }
+    // menggunakan fungsi jquery inArray
+    if ($.inArray(date.getTime(), holiday) > -1) {
+      showDay = false;
+    }
+    return [showDay];
+  }
+  });
+  </script>
+<!-- datepicker end-->
+
 <!-- 運定選擇 -->
 <!-- <script src="../../js/custom.js"></script> -->
 <script src="../../js/single_custom.js"></script>
@@ -981,3 +1071,53 @@ $("form").submit(function(event) {
 <!-- <script src="../../plugins/Isotope/isotope.pkgd.min.js"></script>
 <script src="../../plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 <script src="../../plugins/easing/easing.js"></script> -->
+<script>
+
+$(function () {
+    $("#collect").on("click", function () {
+      $.ajax({
+        type: "PUT",
+        url: "/roomorders/14",
+        data: '123',
+        dataType: "json",
+        encode: true
+      }).done(function(data) {
+        swal({
+          type: "success",
+          title: "收藏成功!",
+        });
+      }).fail(function (error) { 
+        console.log(error);
+        swal({
+          type: 'error',
+          title: "收藏失敗!",
+        });       
+      });
+
+      ;
+          
+    });
+  });
+
+  $(function () {
+    // $("#getData").on("click", function () {
+      $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/roomorders",
+        dataType: "json",
+        encode: true
+      }).done(function(data) {
+        console.log(data);
+        pushJson = document.getElementById("pushJson");
+        // pushJson.innerHTML = data[0].username;
+      
+      }).fail(function (error) { 
+        console.log(error);
+             
+      });
+
+      ;
+          
+    });
+  // });
+</script>
