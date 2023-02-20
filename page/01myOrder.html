@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>房型收藏123</title>
+    <title>房型收藏</title>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- SweetAlert2 -->
@@ -56,6 +56,12 @@
 ul {
 	list-style:none;
 }
+.pagination{
+justify-content: center;
+margin-top:40px
+
+}
+
   </style>
   <body>
   <!-- Header -->
@@ -77,7 +83,6 @@ ul {
     <!-- Breadcrumbs_end -->
     <div >
       <h1 class="table-title">訂單明細</h1>
-      <button class="btn btn-reload">Reload Data</button>
       <div class="table-responsive">
         <table
           class="table table-hover"
@@ -85,13 +90,12 @@ ul {
         >
           <thead>
             <tr >
-              <th>訂單編號</th>
+              <th>#</th>
               <th>房型名稱</th>
               <th>訂單日期</th>
-              <th>訂單金額</th>
-              <th>訂單狀態</th>
-              <th>評價</th>
-              <th>意見回饋</th>
+              <th>金額</th>
+              <th>狀態</th>
+              <th>操作</th>
 
             </tr>
           </thead>
@@ -115,7 +119,7 @@ ul {
     <div class="modal-dialog">
       <div class="modal-content">
                 <div class="modal-header">
-                  <h3 class="modal-title" id="exampleModalLabel">預訂頁面</h3>
+                  <h3 class="modal-title" id="modelTitle"></h3>
                   <button
                     type="button"
                     class="btn-close"
@@ -133,14 +137,14 @@ ul {
                       <input
                         type="text"
                         class="form-control"
-                        id="exampleInputPassword1"
+                        id="roomName"
                         disabled
-                        value="K21321321"
+                        
                       />
                     </div>
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label"
-                        >評價星等</label
+                      <label id="score" class="form-label"
+                        >評價</label
                       >
                       <ul class="comment box" id="star0">
                         <li>☆</li>
@@ -149,21 +153,15 @@ ul {
                         <li>☆</li>
                         <li>☆</li>
                       </ul>
-                      <div id="score"></div>
                     </div>
                     <div class="mb-3">
                       <label
-                        for="exampleInputPassword1"
+                        for="feedback"
                         class="form-label"
                         style="margin-top: 20px"
                         >回饋建議</label
                       >
-                      <textarea
-                        type="password"
-                        class="form-control"
-                        id="exampleInputPassword1"
-                      >
-                      </textarea>
+                      <textarea  type="text"  class="form-control"  id="feedback"  ></textarea>
                     </div>
                   </form>
                 </div>
@@ -176,7 +174,7 @@ ul {
                     取消
                   </button>
 
-                  <button id="success" type="button" class="btn btn-primary">
+                  <button id="submit" type="button" class="btn btn-primary">
                     送出
                   </button>
                 </div>
@@ -310,6 +308,7 @@ crossorigin="anonymous"
 ></script>
 <script>
   var data_table = [];
+  var roomOrderId = '';
   $.extend(true, $.fn.dataTable.defaults, {
     paging: true,
     lengthChange: false,
@@ -328,6 +327,7 @@ crossorigin="anonymous"
       axios
         .get("https://jsonplaceholder.typicode.com/users")
         .then((result) => {
+          console.log(result);
           callback({ data: result.data });
         })
         .catch((err) => {
@@ -350,40 +350,29 @@ crossorigin="anonymous"
       {
         data: null,
         render: function (data, type, row, meta) {
-          return data.address.street;
+          return data.date;
         }
       },
       {
         data: null,
         render: function (data, type, row, meta) {
-          return data.phone;
-        }
-      },
-      
-      {
-        data: null,
-        render: function (data, type, row, meta) {
-          return '<button type="button" class="btn btn-outline-warning btn-cancel-order">取消訂單</button>';
-        }
-      },
-      {
-        data: null,
-        render: function (data, type, row, meta) {
-          return '<button class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#exampleModal">Get All Data</button>';
+          return data.count;
         }
       },
       
       {
         data: null,
         render: function (data, type, row, meta) {
-          return '<button type="button"   class="btn btn-outline-warning btn-comment">評價</button>';
+          return '<button id="cancelOrder" type="button" class="btn btn-outline-warning btn-cancel-order">取消訂單</button>';
+        }
+      },
+      {
+        data: null,
+        render: function (data, type, row, meta) {
+          return '<button class="btn btn-primary btn-edit" data-bs-toggle="modal" data-bs-target="#exampleModal">評價</button>';
         }
       },
     ]
-  });
-  // API刷新
-  $(".btn-reload").click(function () {
-    refreshTable("#table-data");
   });
   $(document).on("click", ".btn-edit", function () {
     let current_row = $(this).parents("tr");
@@ -392,14 +381,10 @@ crossorigin="anonymous"
     }
     let table = $("#table-data").DataTable();
     let data = table.row(current_row).data();
+    roomOrderId = data.email;
     let modal = $('#exampleModal')
-    modal.find('.modal-title').text(data.email);
-    modal.find('#memberId').val(data.name);
-
-    
-    // $(".display-data").html(
-    //   "<pre>" + JSON.stringify(data, null, 4) + "<pre>"
-    // );
+    modal.find('#modelTitle').text(data.email);
+    modal.find('#roomName').val(data.name);
   });
 
   const refreshTable = (tablename) => {
@@ -415,50 +400,9 @@ crossorigin="anonymous"
   };
 </script>
 <!-- API_end-->
-<!-- comment button_start-->
-<script>
-  $(document).on("click", ".btn-comment", function (e) {
-    // 取data
-    let current_row = $(this).parents("tr");
-    if (current_row.hasClass("child")) {
-      current_row = current_row.prev();
-    }
-    let table = $("#table-data").DataTable();
-    let data = table.row(current_row).data();
-    console.log(data)
-    swal({
-      title: "您的留言評論",
-      input: "text",
-      inputPlaceholder: "請輸入...",
-      showCancelButton: true,
-      confirmButtonText: "Submit",
-      showLoaderOnConfirm: true,
-      preConfirm: (email) => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            if (email === "example@email.com") {
-              swal.showValidationError("This email is already taken.");
-            }
-            resolve();
-          }, 2000);
-        });
-      },
-      allowOutsideClick: false
-    }).then((result) => {
-      if (result.value) {
-        swal({
-          type: "success",
-          title: "評論成功!",
-          html: "評論內容: " + result.value
-        });
-      }
-    });
-  });
-</script>
-<!-- comment button_end-->
 <!-- cancel order button_start-->
 <script>
-   $(document).on("click", ".btn-cancel-order", function (e) {
+    $(document).on("click", ".btn-cancel-order", function () {
     // 取data
     let current_row = $(this).parents("tr");
     if (current_row.hasClass("child")) {
@@ -466,20 +410,36 @@ crossorigin="anonymous"
     }
     let table = $("#table-data").DataTable();
     let data = table.row(current_row).data();
-    console.log(data)
     swal({
       title:  `${data.name}`,
       text: "確定要取消此筆訂單?",
       type: "warning",
       cancelButtonText:'取消',
       confirmButtonText: "確定",
+      reverseButtons: true,
       showCancelButton: true
     }).then((result) => {
       if (result.value) {
-        swal({
-          type: "success",
-          title: "取消成功!",
-        });
+        const cancelData = {
+          orderStatus: false,
+        }
+        console.log(cancelData);
+        $.ajax({
+          type: "PUT",
+          url: `/roomorders/${data.roomOrderId}`,
+          data: JSON.stringify(cancelData),
+          dataType: "json",
+          encode: true
+        }).done(function(data) {
+            swal({
+              type: "success",
+              title: "取消成功!",
+            });
+            refreshTable("#table-data");
+        }).fail(function (jqXHR, textStatus, errorThrown) { 
+            console.log('error');
+
+        })
       } 
     });
   });
@@ -495,6 +455,7 @@ crossorigin="anonymous"
 </script>
 <!-- 評價星星 -->
 <script>
+  var star = '';
   $(".box li").click(function(){
    var index = $(this).index();
     $(this).parent().attr("score",index+1);
@@ -504,6 +465,7 @@ crossorigin="anonymous"
     $("#"+parentId).find("li").eq(i).css("background-image","url('star_active.png')");
     }
     var score = $("#"+parentId).attr("score");
+    star = score;
     $("#score").text("評價: "+score+".0");
   });
   $(function() {
@@ -547,6 +509,33 @@ crossorigin="anonymous"
         $(this).addClass("clicked").siblings("li").removeClass("clicked").removeClass('commentCheck');
         
     });
+});
+
+$("#submit").on("click",
+    function() {
+      console.log(roomOrderId)
+      const formData = JSON.stringify({
+        roomName: $("#roomName").val(),
+        feedback: $("#feedback").val(),
+        star: star
+      });
+      console.log(formData)
+      $.ajax({
+        type: "PUT",
+        url: `/roomorders/${roomOrderId}`,
+        data: formData,
+        dataType: "json",
+        encode: true
+      }).done(function(data) {
+          swal({
+            type: "success",
+            title: "編輯成功!",
+          });
+          $('#exampleModal').modal('toggle')
+          refreshTable("#table-data");
+      }).fail(function (jqXHR, textStatus, errorThrown) { 
+          console.log('error');
+      })
 });
 </script>
 
